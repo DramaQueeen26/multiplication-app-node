@@ -1,4 +1,5 @@
 import { argv } from "./config/plugins/args.plugin";
+import { ServerApp } from "./presentation/server-app";
 
 (async() => {
 
@@ -7,7 +8,9 @@ import { argv } from "./config/plugins/args.plugin";
 })()
 
 async function main() {
+
+  const { b: base, l: limit, s: showTable } = argv
   
-  console.log( argv )
+  ServerApp.run({ base, limit, showTable })
 
 }
