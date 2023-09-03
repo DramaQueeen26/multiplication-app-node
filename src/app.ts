@@ -1,6 +1,6 @@
 import { argv } from "./config/plugins/args.plugin";
 
-( async() => {
+(async() => {
 
   await main()
 
