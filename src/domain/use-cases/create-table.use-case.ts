@@ -11,11 +11,11 @@ export class CreateTable implements CreateTableUseCase{
 
   constructor(){}
 
-  execute( { base, limit }: CreateTableOptions) {
+  execute( { base, limit = 10 }: CreateTableOptions) {
 
     let outputMessage: string = ''
 
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= limit; i++) {
 
       outputMessage += `${ base } x ${ i } = ${ base * i } \n`
     
