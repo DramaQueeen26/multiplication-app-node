@@ -1,3 +1,13 @@
 import { argv } from "./config/plugins/args.plugin";
 
-console.log(argv)
+( async() => {
+
+  await main()
+
+})()
+
+async function main() {
+  
+  console.log( argv )
+
+}
