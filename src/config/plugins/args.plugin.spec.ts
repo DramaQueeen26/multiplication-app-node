@@ -14,7 +14,7 @@ describe('args.plugin.ts', () => {
   beforeEach(() => {
     process.argv = originalArgv
     jest.resetModules();
-  });
+  })
 
   test('should return default values', async () => {
 
@@ -28,7 +28,7 @@ describe('args.plugin.ts', () => {
       d: '/outputs',
     }))
 
-  });
+  })
 
   test('should return default values', async () => {
 
@@ -42,7 +42,7 @@ describe('args.plugin.ts', () => {
       d: '/outputs',
     }))
 
-  });
+  })
 
 
   test('should return configuration with custom values', async() => {
