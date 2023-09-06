@@ -3,8 +3,17 @@ import { SaveFile } from './save-file.use-case';
 
 describe('save-file.use-case.ts', () => {
 
+  const customOptions = {
+    fileContent: 'custom content',
+    fileDestination: 'custom-outputs/file-destination',
+    fileName: 'custom-table-name'
+  }
+  
+  const customFilePath = `${ customOptions.fileDestination }/${ customOptions.fileName }.txt`
+
   afterEach( () => {
-    rmSync('outputs', { recursive: true })
+    if ( existsSync('outputs') ) rmSync('outputs', { recursive: true })
+    if ( existsSync( customOptions.fileDestination ) ) rmSync( customOptions.fileDestination, { recursive: true })
   })
 
 
@@ -24,6 +33,22 @@ describe('save-file.use-case.ts', () => {
     expect( result ).toBeTruthy()
     expect( fileExists ).toBeTruthy()
     expect( fileContent ).toBe( options.fileContent )
+
+  })
+
+  test('should save file with custom values', () => { 
+
+    const saveFile = new SaveFile()
+
+    const result = saveFile.execute( customOptions )
+    const fileContent = readFileSync( customFilePath, { encoding: 'utf-8' })
+    const fileExists = existsSync( customFilePath )
+
+
+    expect( result ).toBeTruthy()
+    expect( fileExists ).toBeTruthy()
+    expect( fileContent ).toBe( customOptions.fileContent )
+
 
   })
 
