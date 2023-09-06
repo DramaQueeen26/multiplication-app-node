@@ -1,3 +1,4 @@
+import fs from 'fs'
 import { existsSync, readFileSync, rmSync } from 'fs';
 import { SaveFile } from './save-file.use-case';
 
@@ -49,6 +50,34 @@ describe('save-file.use-case.ts', () => {
     expect( fileExists ).toBeTruthy()
     expect( fileContent ).toBe( customOptions.fileContent )
 
+
+  })
+
+  test('should return false if directory could not be created', () => { 
+    
+    const saveFile = new SaveFile()
+
+    const mkdirSpy = jest.spyOn(fs, 'mkdirSync').mockImplementation( () => { throw new Error('This is a custom error message from testing') } )
+
+    const result = saveFile.execute( customOptions )
+
+    expect( result ).toBe( false )
+
+    mkdirSpy.mockRestore()
+
+  })
+
+  test('should return false if file could not be created', () => { 
+    
+    const saveFile = new SaveFile()
+
+    const writeFileSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation( () => { throw new Error('This is a custom error message from testing') } )
+
+    const result = saveFile.execute({ fileContent: 'Testing' })
+
+    expect( result ).toBe( false )
+
+    writeFileSpy.mockRestore()
 
   })
 
